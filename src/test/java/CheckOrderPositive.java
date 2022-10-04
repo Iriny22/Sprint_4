@@ -37,6 +37,7 @@ public class CheckOrderPositive {
         options.setCapability("marionette", false);
 
         driver = new FirefoxDriver(options);
+        driver.get(MainPage.URL_MAIN_PAGE);
     }
 
     public CheckOrderPositive(String firstName, String secondName, String address, String metro, String phone, String lasting, String color, String comment) {
@@ -61,42 +62,34 @@ public class CheckOrderPositive {
 
         //Проверка успешного оформления заказа с нажатием на нижнюю кнопку "Заказать"
         @Test
-        public void CheckOrderWithButtonBottomPositive() {
-            String date = LocalDate.now().toString().replace("-",".");
-            // переход на страницу тестового приложения
-            driver.get("https://qa-scooter.praktikum-services.ru/");
+        public void checkOrderWithButtonBottomPositive() {
+            MainPage mainPage = new MainPage(driver);
+            mainPage.clickOrderButtonBottom();
+            OrderProfileData orderProfileData = new OrderProfileData(driver);
 
-            MainPage objMainPage = new MainPage(driver);
-            objMainPage.clickOrderButtonBottom();
-            OrderProfileData objOrder = new OrderProfileData(driver);
-
-            objOrder.orderFillInProfileData(firstName, secondName, address, metro, phone);
-            OrderRentData objOrderRentData = new OrderRentData(driver);
+            orderProfileData.orderFillInProfileData(firstName, secondName, address, metro, phone);
+            OrderRentData orderRentData = new OrderRentData(driver);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy"); // готовим нужный форматтер
+            String date = LocalDate.now().format(formatter); // получаем текущую дату, прибавляем к ней 2 дня и форматируем
 
-            objOrderRentData.orderFillInRentData(date,lasting,color,comment);
+            orderRentData.orderFillInRentData(date,lasting,color,comment);
         }
 
 
         //Проверка успешного оформления заказа с нажатием на верхнюю кнопку "Заказать"
     @Test
-    public void CheckOrderWithButtonTopPositive() {
-       String date = LocalDate.now().toString().replace("-",".");
-        // переход на страницу тестового приложения
-        driver.get("https://qa-scooter.praktikum-services.ru/");
+    public void checkOrderWithButtonTopPositive() {
+        MainPage mainPage = new MainPage(driver);
+        mainPage.clickOrderButtonTop();
+        OrderProfileData orderProfileData = new OrderProfileData(driver);
 
-        MainPage objMainPage = new MainPage(driver);
-        objMainPage.clickOrderButtonTop();
-        OrderProfileData objOrder = new OrderProfileData(driver);
+        orderProfileData.orderFillInProfileData(firstName, secondName, address, metro, phone);
+        OrderRentData orderRentData = new OrderRentData(driver);
 
-        objOrder.orderFillInProfileData(firstName, secondName, address, metro, phone);
-        OrderRentData objOrderRentData = new OrderRentData(driver);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy"); // готовим нужный форматтер
-
-        objOrderRentData.orderFillInRentData(date,lasting,color,comment);
+        String date = LocalDate.now().format(formatter); // получаем текущую дату, прибавляем к ней 2 дня и форматируем
+        orderRentData.orderFillInRentData(date,lasting,color,comment);
     }
-
-
 
     //закрытие браузера
     @After

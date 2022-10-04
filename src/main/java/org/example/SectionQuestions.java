@@ -35,7 +35,7 @@ public class SectionQuestions {
 
 
     //Локатор секции
-    private final static By SECTION_QUESTIONS = By.xpath("//*[@id=\"root\"]/div/div[1]/div[5]/div[1]") ;
+    private final By SECTION_QUESTIONS = By.xpath("//*[@id=\"root\"]/div/div[1]/div[5]/div[1]") ;
 
     //Конструктор
     public SectionQuestions(WebDriver driver) {

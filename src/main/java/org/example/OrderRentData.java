@@ -13,39 +13,39 @@ public class OrderRentData {
     private WebDriver driver;
 
     //локатор, когда привезти самокат
-    private final static By WHEN_DATE = By.xpath(".//div[@class='react-datepicker__input-container']/input[@placeholder='* Когда привезти самокат']");
+    private final By WHEN_DATE = By.xpath(".//div[@class='react-datepicker__input-container']/input[@placeholder='* Когда привезти самокат']");
 
 
     //локатор для текущей даты в календаре
-    private final static By NOW_DATE = By.xpath(".//div[@class=\"react-datepicker__month-container\"]/div[2]/div/div[@tabindex=\"0\"]");
+    private final By NOW_DATE = By.xpath(".//div[@class=\"react-datepicker__month-container\"]/div[2]/div/div[@tabindex=\"0\"]");
 
     //локатор - срок аренды
-    private final static By LASTING = By.className("Dropdown-placeholder");
+    private final By LASTING = By.className("Dropdown-placeholder");
 
     //локатор список сроков аренды
-    private final static String LIST_LASTING_EXPANDED = ".//div[@class='Dropdown-menu' and @aria-expanded='true']/div[text() = '%s']";
+    private final String LIST_LASTING_EXPANDED = ".//div[@class='Dropdown-menu' and @aria-expanded='true']/div[text() = '%s']";
 
 
     //локатор - цвет самоката (черный)
-    private final static By COLOR_BLACK = By.id("black");
+    private final By COLOR_BLACK = By.id("black");
 
     //локатор - цвет самоката (серый)
-    private final static By COLOR_GREY = By.id("grey");
+    private final By COLOR_GREY = By.id("grey");
 
     //локатор - комментарий для курьера
-    private final static By COMMENT = By.xpath(".//div[@class='Order_Form__17u6u']/div/input[@placeholder=\"Комментарий для курьера\"]");
+    private final By COMMENT = By.xpath(".//div[@class='Order_Form__17u6u']/div/input[@placeholder=\"Комментарий для курьера\"]");
 
     //кнопка Заказать
-    private final static By ORDER_BUTTON = By.xpath(".//div[@class='Order_Buttons__1xGrp']/button[2]");
+    private final By ORDER_BUTTON = By.xpath(".//div[@class='Order_Buttons__1xGrp']/button[2]");
 
     //окно подтверждения заказа
-    private final static By WINDOW_SUBMIT_ORDER = By.className("Order_Modal__YZ-d3");
+    private final By WINDOW_SUBMIT_ORDER = By.className("Order_Modal__YZ-d3");
 
     //кнопка подтверждения заказа
-    private final static By SUBMIT_ORDER_BUTTON = By.xpath(".//div[@class=\"Order_Buttons__1xGrp\"]/button[text()='Да']");
+    private final By SUBMIT_ORDER_BUTTON = By.xpath(".//div[@class=\"Order_Buttons__1xGrp\"]/button[text()='Да']");
 
     //заказ оформлен
-    private final static By SUCCESS_ORDER_STATUS = By.xpath(".//div[@class='Order_Modal__YZ-d3']/div[text()='Заказ оформлен']");
+    private final By SUCCESS_ORDER_STATUS = By.xpath(".//div[@class='Order_Modal__YZ-d3']/div[text()='Заказ оформлен']");
 
     public OrderRentData (WebDriver driver) {
         this.driver = driver;
@@ -78,8 +78,11 @@ public class OrderRentData {
     }
 
     public void fillInColor (String color) {
-        if (color == "черный") {
+        if (color.equals("черный")) {
             driver.findElement(COLOR_BLACK).click();
-        } else driver.findElement(COLOR_GREY).click();
+        }
+        else if(color.equals("серый")) {
+            driver.findElement(COLOR_GREY).click();
+        }
     }
 }
