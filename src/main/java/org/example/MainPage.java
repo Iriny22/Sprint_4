@@ -14,13 +14,13 @@ public class MainPage {
     public final static String URL_MAIN_PAGE = "https://qa-scooter.praktikum-services.ru/";
 
     //локатор верхней кнопки "Заказать"
-    private final By ORDER_BUTTON_TOP = By.xpath(".//div[2]/button[1]");
+    private final By orderButtonTop = By.xpath(".//div[2]/button[1]");
 
     //локатор нижней кнопки "Заказать"
-    private final By ORDER_BUTTON_BOTTOM = By.xpath(".//div[5]/button");
+    private final By orderButtonBottom = By.xpath(".//div[5]/button");
 
     //локатор куки-баннера
-    private final By COOKIE_BANNER_SUBMIT_BUTTON = By.id("rcc-confirm-button");
+    private final By cookieBannerSubmitButton = By.id("rcc-confirm-button");
 
 
     //конструктор класса
@@ -30,13 +30,13 @@ public class MainPage {
 
     //нажатие верхней кнопки "Заказать"
     public void clickOrderButtonTop() {
-        driver.findElement(ORDER_BUTTON_TOP).click();
+        driver.findElement(orderButtonTop).click();
     }
 
     //закрыть куки-баннер, если он отображается на странице
     public void closeCookieBanner() {
-        if (driver.findElement(COOKIE_BANNER_SUBMIT_BUTTON).isDisplayed()) {
-            driver.findElement(COOKIE_BANNER_SUBMIT_BUTTON).click();
+        if (driver.findElement(cookieBannerSubmitButton).isDisplayed()) {
+            driver.findElement(cookieBannerSubmitButton).click();
         }
     }
 
@@ -45,7 +45,7 @@ public class MainPage {
 
         closeCookieBanner();
         new WebDriverWait(driver, Duration.ofSeconds(3))
-                .until(ExpectedConditions.elementToBeClickable(ORDER_BUTTON_BOTTOM));
-        driver.findElement(ORDER_BUTTON_BOTTOM).click();
+                .until(ExpectedConditions.elementToBeClickable(orderButtonBottom));
+        driver.findElement(orderButtonBottom).click();
     }
 }

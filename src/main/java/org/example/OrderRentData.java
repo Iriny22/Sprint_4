@@ -13,39 +13,39 @@ public class OrderRentData {
     private WebDriver driver;
 
     //локатор, когда привезти самокат
-    private final By WHEN_DATE = By.xpath(".//div[@class='react-datepicker__input-container']/input[@placeholder='* Когда привезти самокат']");
+    private final By whenDate = By.xpath(".//div[@class='react-datepicker__input-container']/input[@placeholder='* Когда привезти самокат']");
 
 
     //локатор для текущей даты в календаре
-    private final By NOW_DATE = By.xpath(".//div[@class=\"react-datepicker__month-container\"]/div[2]/div/div[@tabindex=\"0\"]");
+    private final By nowDate = By.xpath(".//div[@class=\"react-datepicker__month-container\"]/div[2]/div/div[@tabindex=\"0\"]");
 
     //локатор - срок аренды
-    private final By LASTING = By.className("Dropdown-placeholder");
+    private final By lasting = By.className("Dropdown-placeholder");
 
     //локатор список сроков аренды
-    private final String LIST_LASTING_EXPANDED = ".//div[@class='Dropdown-menu' and @aria-expanded='true']/div[text() = '%s']";
+    private final String listLastingExpanded = ".//div[@class='Dropdown-menu' and @aria-expanded='true']/div[text() = '%s']";
 
 
     //локатор - цвет самоката (черный)
-    private final By COLOR_BLACK = By.id("black");
+    private final By colorBlack = By.id("black");
 
     //локатор - цвет самоката (серый)
-    private final By COLOR_GREY = By.id("grey");
+    private final By colorGrey = By.id("grey");
 
     //локатор - комментарий для курьера
-    private final By COMMENT = By.xpath(".//div[@class='Order_Form__17u6u']/div/input[@placeholder=\"Комментарий для курьера\"]");
+    private final By comment = By.xpath(".//div[@class='Order_Form__17u6u']/div/input[@placeholder=\"Комментарий для курьера\"]");
 
     //кнопка Заказать
-    private final By ORDER_BUTTON = By.xpath(".//div[@class='Order_Buttons__1xGrp']/button[2]");
+    private final By orderButton = By.xpath(".//div[@class='Order_Buttons__1xGrp']/button[2]");
 
     //окно подтверждения заказа
-    private final By WINDOW_SUBMIT_ORDER = By.className("Order_Modal__YZ-d3");
+    private final By windowSubmitOrder = By.className("Order_Modal__YZ-d3");
 
     //кнопка подтверждения заказа
-    private final By SUBMIT_ORDER_BUTTON = By.xpath(".//div[@class=\"Order_Buttons__1xGrp\"]/button[text()='Да']");
+    private final By submitOrderButton = By.xpath(".//div[@class=\"Order_Buttons__1xGrp\"]/button[text()='Да']");
 
     //заказ оформлен
-    private final By SUCCESS_ORDER_STATUS = By.xpath(".//div[@class='Order_Modal__YZ-d3']/div[text()='Заказ оформлен']");
+    private final By successOrderStatus = By.xpath(".//div[@class='Order_Modal__YZ-d3']/div[text()='Заказ оформлен']");
 
     public OrderRentData (WebDriver driver) {
         this.driver = driver;
@@ -53,11 +53,11 @@ public class OrderRentData {
 
     public void orderFillInRentData(String whenDate, String lasting, String color, String comment) {
         new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.visibilityOf(driver.findElement(WHEN_DATE)));
-        driver.findElement(WHEN_DATE).sendKeys(whenDate);
-        driver.findElement(NOW_DATE).click();
-        driver.findElement(LASTING).click();
-        String stringElement = String.format(LIST_LASTING_EXPANDED, lasting);
+                .until(ExpectedConditions.visibilityOf(driver.findElement(this.whenDate)));
+        driver.findElement(this.whenDate).sendKeys(whenDate);
+        driver.findElement(nowDate).click();
+        driver.findElement(this.lasting).click();
+        String stringElement = String.format(listLastingExpanded, lasting);
         By lastingElement = By.xpath(stringElement);
         new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.visibilityOf(driver.findElement(lastingElement)));
@@ -65,24 +65,28 @@ public class OrderRentData {
 
         fillInColor(color);
 
-        driver.findElement(COMMENT).sendKeys(comment);
+        driver.findElement(this.comment).sendKeys(comment);
         new WebDriverWait(driver, Duration.ofSeconds(3))
-                .until(ExpectedConditions.elementToBeClickable(driver.findElement(ORDER_BUTTON)) );
-        driver.findElement(ORDER_BUTTON).click();
+                .until(ExpectedConditions.elementToBeClickable(driver.findElement(orderButton)) );
+        driver.findElement(orderButton).click();
         new WebDriverWait(driver, Duration.ofSeconds(3))
-                .until(ExpectedConditions.elementToBeClickable(driver.findElement(SUBMIT_ORDER_BUTTON)) );
-        driver.findElement(SUBMIT_ORDER_BUTTON).click();
-        new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.visibilityOf(driver.findElement(SUCCESS_ORDER_STATUS)));
+                .until(ExpectedConditions.elementToBeClickable(driver.findElement(submitOrderButton)) );
+        driver.findElement(submitOrderButton).click();
+         checkSuccessOrderStatus();
 
+    }
+
+    public void checkSuccessOrderStatus() {
+        new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOf(driver.findElement(successOrderStatus)));
     }
 
     public void fillInColor (String color) {
         if (color.equals("черный")) {
-            driver.findElement(COLOR_BLACK).click();
+            driver.findElement(colorBlack).click();
         }
         else if(color.equals("серый")) {
-            driver.findElement(COLOR_GREY).click();
+            driver.findElement(colorGrey).click();
         }
     }
 }

@@ -4,12 +4,15 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 
 //Проверка секции "Вопросы о важном"
+
 public class CheckSectionQuestions {
     private WebDriver driver;
 
@@ -24,14 +27,16 @@ public class CheckSectionQuestions {
         driver.get(MainPage.URL_MAIN_PAGE);
     }
 
+
+
     @Test
     public void expandQuestion0ShowCorrectText(){
         String expected = "Сутки — 400 рублей. Оплата курьеру — наличными или картой.";
 
         SectionQuestions sectionQuestions = new SectionQuestions(driver);
         sectionQuestions.scrollToSectionQuestions();
-        sectionQuestions.expandQuestion(SectionQuestions.QUESTION0);
-        String actual = sectionQuestions.showAnswer(SectionQuestions.ANSWER0);
+        sectionQuestions.expandQuestion("0");
+        String actual = sectionQuestions.showAnswer("0");
         Assert.assertEquals("Текст не соответствует ожидаемому!", expected,actual);
 
     }
@@ -42,8 +47,8 @@ public class CheckSectionQuestions {
 
         SectionQuestions sectionQuestions = new SectionQuestions(driver);
         sectionQuestions.scrollToSectionQuestions();
-        sectionQuestions.expandQuestion(SectionQuestions.QUESTION1);
-        String actual = sectionQuestions.showAnswer(SectionQuestions.ANSWER1);
+        sectionQuestions.expandQuestion("1");
+        String actual = sectionQuestions.showAnswer("1");
         Assert.assertEquals("Текст не соответствует ожидаемому!",expected,actual);
 
     }
@@ -54,8 +59,8 @@ public class CheckSectionQuestions {
 
         SectionQuestions sectionQuestions = new SectionQuestions(driver);
         sectionQuestions.scrollToSectionQuestions();
-        sectionQuestions.expandQuestion(SectionQuestions.QUESTION2);
-        String actual = sectionQuestions.showAnswer(SectionQuestions.ANSWER2);
+        sectionQuestions.expandQuestion("2");
+        String actual = sectionQuestions.showAnswer("2");
         Assert.assertEquals("Текст не соответствует ожидаемому!", expected,actual);
 
     }
@@ -66,8 +71,8 @@ public class CheckSectionQuestions {
 
         SectionQuestions sectionQuestions = new SectionQuestions(driver);
         sectionQuestions.scrollToSectionQuestions();
-        sectionQuestions.expandQuestion(SectionQuestions.QUESTION3);
-        String actual = sectionQuestions.showAnswer(SectionQuestions.ANSWER3);
+        sectionQuestions.expandQuestion("3");
+        String actual = sectionQuestions.showAnswer("3");
         Assert.assertEquals("Текст не соответствует ожидаемому!", expected,actual);
 
     }
@@ -78,8 +83,8 @@ public class CheckSectionQuestions {
 
         SectionQuestions sectionQuestions = new SectionQuestions(driver);
         sectionQuestions.scrollToSectionQuestions();
-        sectionQuestions.expandQuestion(SectionQuestions.QUESTION4);
-        String actual = sectionQuestions.showAnswer(SectionQuestions.ANSWER4);
+        sectionQuestions.expandQuestion("4");
+        String actual = sectionQuestions.showAnswer("4");
         Assert.assertEquals("Текст не соответствует ожидаемому!", expected,actual);
 
     }
@@ -89,8 +94,8 @@ public class CheckSectionQuestions {
 
         SectionQuestions sectionQuestions = new SectionQuestions(driver);
         sectionQuestions.scrollToSectionQuestions();
-        sectionQuestions.expandQuestion(SectionQuestions.QUESTION5);
-        String actual = sectionQuestions.showAnswer(SectionQuestions.ANSWER5);
+        sectionQuestions.expandQuestion("5");
+        String actual = sectionQuestions.showAnswer("5");
         Assert.assertEquals("Текст не соответствует ожидаемому!", expected,actual);
 
     }
@@ -100,8 +105,8 @@ public class CheckSectionQuestions {
 
         SectionQuestions sectionQuestions = new SectionQuestions(driver);
         sectionQuestions.scrollToSectionQuestions();
-        sectionQuestions.expandQuestion(SectionQuestions.QUESTION6);
-        String actual = sectionQuestions.showAnswer(SectionQuestions.ANSWER6);
+        sectionQuestions.expandQuestion("6");
+        String actual = sectionQuestions.showAnswer("6");
         Assert.assertEquals("Текст не соответствует ожидаемому!", expected,actual);
 
     }
@@ -111,8 +116,8 @@ public class CheckSectionQuestions {
 
         SectionQuestions sectionQuestions = new SectionQuestions(driver);
         sectionQuestions.scrollToSectionQuestions();
-        sectionQuestions.expandQuestion(SectionQuestions.QUESTION7);
-        String actual = sectionQuestions.showAnswer(SectionQuestions.ANSWER7);
+        sectionQuestions.expandQuestion("7");
+        String actual = sectionQuestions.showAnswer("7");
         Assert.assertEquals("Текст не соответствует ожидаемому!", expected,actual);
     }
 

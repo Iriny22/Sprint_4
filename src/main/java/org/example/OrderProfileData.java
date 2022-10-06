@@ -12,25 +12,25 @@ public class OrderProfileData {
     private WebDriver driver;
 
     //локатор поля "Имя"
-    private final By FIRST_NAME = By.xpath(".//div[@class='Order_Form__17u6u']/div/input[@placeholder='* Имя']");
+    private final By firstName = By.xpath(".//div[@class='Order_Form__17u6u']/div/input[@placeholder='* Имя']");
 
     //локатор поля "Фамилия"
-    private final By SECOND_NAME = By.xpath("//*[@id='root']/div/div[2]/div[2]/div[2]/input");
+    private final By secondName = By.xpath("//*[@id='root']/div/div[2]/div[2]/div[2]/input");
 
     //локатор поля "Адрес"
-    private final By ADDRESS = By.xpath("//*[@id='root']/div/div[2]/div[2]/div[3]/input");
+    private final By address = By.xpath("//*[@id='root']/div/div[2]/div[2]/div[3]/input");
 
     //локатор поля "Станция метро"
-    private final By METRO = By.xpath("//*[@id='root']/div/div[2]/div[2]/div[4]/div/div[1]/input");
+    private final By metro = By.xpath("//*[@id='root']/div/div[2]/div[2]/div[4]/div/div[1]/input");
 
     //локатор раскрывающегося списка станций метро
-    private final String METRO_EXPANDED = ".//div[@class='Order_Text__2broi' and text()='%s']";
+    private final String metroExpanded = ".//div[@class='Order_Text__2broi' and text()='%s']";
 
     //локатор поля "Телефон"
-    private final By PHONE = By.xpath("//*[@id='root']/div/div[2]/div[2]/div[5]/input");
+    private final By phone = By.xpath("//*[@id='root']/div/div[2]/div[2]/div[5]/input");
 
     //локатор кнопки "Далее"
-    private final By NEXT_BUTTON = By.xpath("//*[@id='root']/div/div[2]/div[3]/button");
+    private final By nextButton = By.xpath("//*[@id='root']/div/div[2]/div[3]/button");
 
     //конструктор
     public OrderProfileData(WebDriver driver) {
@@ -40,21 +40,21 @@ public class OrderProfileData {
     //заполнить форму
     public void orderFillInProfileData(String name, String surname, String address, String metro, String phone) {
         new WebDriverWait(driver, Duration.ofSeconds(3))
-                .until(ExpectedConditions.visibilityOf(driver.findElement(FIRST_NAME)));
-        driver.findElement(FIRST_NAME).sendKeys(name);
-        driver.findElement(SECOND_NAME).sendKeys(surname);
-        driver.findElement(ADDRESS).sendKeys(address);
+                .until(ExpectedConditions.visibilityOf(driver.findElement(firstName)));
+        driver.findElement(firstName).sendKeys(name);
+        driver.findElement(secondName).sendKeys(surname);
+        driver.findElement(this.address).sendKeys(address);
         fillInStation(metro);
-        driver.findElement(PHONE).sendKeys(phone);
+        driver.findElement(this.phone).sendKeys(phone);
         new WebDriverWait(driver, Duration.ofSeconds(3))
-                .until(ExpectedConditions.elementToBeClickable(driver.findElement(NEXT_BUTTON)) );
-        driver.findElement(NEXT_BUTTON).click();
+                .until(ExpectedConditions.elementToBeClickable(driver.findElement(nextButton)) );
+        driver.findElement(nextButton).click();
     }
 
     public void fillInStation(String metro) {
 
-        driver.findElement(METRO).sendKeys(metro);
-        String stringElement = String.format(METRO_EXPANDED, metro);
+        driver.findElement(this.metro).sendKeys(metro);
+        String stringElement = String.format(metroExpanded, metro);
         By stationElement = By.xpath(stringElement);
         new WebDriverWait(driver, Duration.ofSeconds(3))
                 .until(ExpectedConditions.visibilityOf(driver.findElement(stationElement)));

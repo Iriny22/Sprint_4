@@ -25,6 +25,9 @@ public class CheckOrderPositive {
     private final String lasting;
     private final String color;
     private final String comment;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy"); // готовим нужный форматтер
+    String date = LocalDate.now().format(formatter); // получаем текущую дату и форматируем
+
 
 
     //настройка драйвера
@@ -66,12 +69,8 @@ public class CheckOrderPositive {
             MainPage mainPage = new MainPage(driver);
             mainPage.clickOrderButtonBottom();
             OrderProfileData orderProfileData = new OrderProfileData(driver);
-
             orderProfileData.orderFillInProfileData(firstName, secondName, address, metro, phone);
             OrderRentData orderRentData = new OrderRentData(driver);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy"); // готовим нужный форматтер
-            String date = LocalDate.now().format(formatter); // получаем текущую дату, прибавляем к ней 2 дня и форматируем
-
             orderRentData.orderFillInRentData(date,lasting,color,comment);
         }
 
@@ -82,12 +81,8 @@ public class CheckOrderPositive {
         MainPage mainPage = new MainPage(driver);
         mainPage.clickOrderButtonTop();
         OrderProfileData orderProfileData = new OrderProfileData(driver);
-
         orderProfileData.orderFillInProfileData(firstName, secondName, address, metro, phone);
         OrderRentData orderRentData = new OrderRentData(driver);
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy"); // готовим нужный форматтер
-        String date = LocalDate.now().format(formatter); // получаем текущую дату, прибавляем к ней 2 дня и форматируем
         orderRentData.orderFillInRentData(date,lasting,color,comment);
     }
 
